@@ -4,8 +4,11 @@ phases:
     runtime-versions:
         nodejs: 8.10
   build:
-    commands:
-      - sam package --template-file template.yml --s3-bucket aplambdanode --output-template-file packaged-template.yml
+    commands:     
+      - pip install --upgrade pip
+      - pip install pipenv --user
+      - pipenv install awscli aws-sam-cli
+      - pipenv run sam package --template-file template.yml --s3-bucket aplambdanode --output-template-file packaged-template.yml
 artifacts:
   files:
     - packaged-template.yml
